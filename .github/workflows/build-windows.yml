@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Get the code
         uses: actions/checkout@v4
- 
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements_gui.txt
 
-            - name: Build EXE with PyInstaller
+      - name: Build EXE with PyInstaller
         run: >
           pyinstaller --noconfirm --onedir --windowed --name "PlateCutter"
           --collect-all tkinterdnd2
