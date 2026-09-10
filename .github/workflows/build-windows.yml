@@ -1,0 +1,36 @@
+name: Build Windows App
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements_gui.txt
+
+      - name: Build EXE with PyInstaller
+        run: >
+          pyinstaller --noconfirm --onedir --windowed
+          --collect-all tkinterdnd2
+          --collect-all scipy
+          --hidden-import=scipy._lib.array_api_compat.numpy.fft
+          --hidden-import=scipy.special._cdflib
+          gui_app.py
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PlateCutter-Windows
+          path: dist/PlateCutter
