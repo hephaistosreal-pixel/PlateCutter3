@@ -20,9 +20,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements_gui.txt
 
-      - name: Build EXE with PyInstaller
+            - name: Build EXE with PyInstaller
         run: >
-          pyinstaller --noconfirm --onedir --windowed
+          pyinstaller --noconfirm --onedir --windowed --name "PlateCutter"
           --collect-all tkinterdnd2
           --collect-all scipy
           --hidden-import=scipy._lib.array_api_compat.numpy.fft
